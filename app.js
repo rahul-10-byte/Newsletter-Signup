@@ -3,6 +3,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
+const https = require("https");
+const { callbackify } = require("util");
 
 const app = express();
 
@@ -14,14 +16,53 @@ app.get("/", function (req, res) {
 });
 
 app.post("/", function (req, res) {
-    var firstName = req.body.fname;
-    var lastName = req.body.lname;
-    var email = req.body.email;
+    const firstName = req.body.fname;
+    const lastName = req.body.lname;
+    const email = req.body.email;
 
     console.log(firstName, lastName, email);
+
+    const data = {
+        members: [
+            {
+                email_address: email,
+                status: "subscribed",
+                merge_fields: {
+                    FNAME: firstName,
+                    LNAME: lastName
+                }
+            }
+        ]
+    };
+
+    const jsonData = JSON.stringify(data);
+    
+    const url = "https://us20.api.mailchimp.com/3.0/lists/4ca08aef41";
+
+    const options = {
+        method: "POST",
+        auth: "rahul10:428a1a0fbfe4c3bdf06016f4f4db4d34-us20"
+    };
+
+    const request = https.request(url, options, function (response) {
+        response.on("data", function (data) {
+            console.log(JSON.parse(data));
+        });
+    });
+
+    request.write(jsonData);
+    request.end();
+
 });
 
 
 app.listen(3000, function () {
     console.log("Server started at 3000!!");
 });
+
+
+//API key
+// 428a1a0fbfe4c3bdf06016f4f4db4d34-us20
+
+// list id
+// 4ca08aef41
