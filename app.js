@@ -37,7 +37,7 @@ app.post("/", function (req, res) {
 
     const jsonData = JSON.stringify(data);
     
-    const url = "https://us20.api.mailchimp.com/3.0/lists/4ca08aef41";
+    const url = "https://us20.api.mailchimp.com/3.0/lists/4ca08aef4";
 
     const options = {
         method: "POST",
@@ -62,6 +62,9 @@ app.post("/", function (req, res) {
 
 });
 
+app.post("/failure", function (req, res) {
+    res.redirect("/");
+});
 
 app.listen(3000, function () {
     console.log("Server started at 3000!!");

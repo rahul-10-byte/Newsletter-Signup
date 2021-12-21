@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +12,19 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
+
 <body>
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-4">Uh Oh!</h1>
-          <p class="lead">There was a problem signing you up, Plase try again or contact the Developer.</p>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-3">Uh Oh!</h1>
+            <p class="col-md-8 fs-4">There was a problem signing you up, Plase try again or contact the Developer.</p>
+            <form action="/failure" method="post">
+                <button class="btn btn-lg btn-warning" type="submit" name="submit">Try Again!</button>
+            </form>
         </div>
-      </div>
+    </div>
 
 </body>
+
 </html>
